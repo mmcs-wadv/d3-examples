@@ -1,0 +1,19 @@
+{
+  "name": "projectdemo1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel serve index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "d3": "^6.2.0",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "parcel": "^1.12.4"
+  }
+}
