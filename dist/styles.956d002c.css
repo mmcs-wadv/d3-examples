@@ -1,7 +1,70 @@
-.line{
-    fill: none;
-    stroke: #000088;
-    stroke-width: 3;
+.main-header, .container{
+  font-size: 20px;
+}
+
+.main-header {
+ padding: 20px;
+ background: #CCCCCC;
+}
+.main-header > .login {
+    float: right;
+}
+.vertical {
+    top: 50%;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+.container{
+    display: flex;
+    width: 100%;
+}
+.sidebar{
+    width: 25%;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+}
+.sidebar > .menu-button{
+    display: block;
+    width: 100%;
+    background: #129a22;
+    color: white;
+    padding: 14px 28px;
+    font-size: 24px;
+    text-align: center;
+    border: black 1px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+
+}
+.sidebar > .menu-button:hover{
+    background: #12BB33;
+}
+.main-section{
+    width: 75%;
+    float: left;
+    padding-left: 20px;
+}
+
+.goals{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.goals > .row{
+   display: flex;
+   justify-content: space-around;
+   margin-top: 20px;
+}
+
+.goals > .row > .placeholder{
+    width: 400px ;
+    height: 400px ;
+    background: orange;
 }
 
 /*# sourceMappingURL=/styles.956d002c.css.map */

@@ -1,64 +1,32 @@
-import * as Daily from './daily.json'
 import * as d3 from 'd3'
 import _ from 'lodash'
-const Data = Object.values(Daily);
+import Quotes from './quotes.json'
+import Goals from "./components/Goals";
 
-function initLineGraph(selector){
 
-   const defaultMargin = 50;
-   const margin = {top: defaultMargin, right: defaultMargin,
-       bottom: defaultMargin, left: defaultMargin};
-   const width = 1200 - margin.left - margin.right;
-   const height = 480 - margin.top - margin.bottom;
-
-    const dataset = Data.map((dataEntry) => {
-        return {
-            x: d3.timeParse("%Y%m%d")(dataEntry.date),
-            y: dataEntry.death ? dataEntry.death : 0
-        }
-    })
-        .filter((dataEntry) => {
-            return dataEntry.y != null
-        })
-        .reverse();
-
-    const yScale = d3.scaleLinear()
-        .domain([0, _.maxBy(dataset, x=>x.y).y])
-        .range([height, 0]);
-
-    const xScale = d3.scaleTime()
-        .domain([
-            _.minBy(dataset, dataEntry=>dataEntry.x).x,
-            _.maxBy(dataset, dataEntry=>dataEntry.x).x])
-        .range([0, width]);
-
-    const line = d3.line()
-        .x((p)=>{return xScale(p.x)})
-        .y((p)=>{return yScale(p.y)})
-        .curve(d3.curveMonotoneX);
-
-    const svg = d3.select(selector).append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append('g')
-        .attr("transform", `translate(${margin.left}, ${margin.top})`);
-    svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(xScale));
-    svg.append("g")
-        .attr("class", "y axis")
-        .call(d3.axisLeft(yScale));
-    svg.append("path")
-        .datum(dataset)
-        .attr("class", 'line')
-        .attr('d', line);
-
-}
-function initContainers() {
-    initLineGraph("#line-graph");
-}
 
 document.addEventListener('DOMContentLoaded', function (){
-  initContainers();
+    const mainSection = document.getElementById("main-section");
+    mainSection.innerHTML = `<h1>${_.sample(Quotes.quotes)}</h1>`
+
+    const calendarButton = document.getElementById("calendar-button");
+    calendarButton.onclick = ShowCalendar;
+    const booksButton = document.getElementById("books-button");
+    booksButton.onclick = ShowBooks;
+    const goalsButton = document.getElementById("goals-button");
+    goalsButton.onclick = ShowGoals;
+
+    function ShowCalendar() {
+        mainSection.innerHTML = "<h1>I will a Calendar one day!</h1>"
+    }
+
+    function ShowBooks() {
+        mainSection.innerHTML = "<h1>I will a Books List one day!</h1>"
+    }
+
+    function ShowGoals() {
+        const goals = new Goals();
+        goals.buildGoals(mainSection);
+    }
+
 });
